@@ -1,48 +1,40 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>Wonbin Kim Blog</title>
-</head>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    :root { --max: 860px; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-      line-height: 1.7;
-      margin: 0;
-      background: #0b1220;
-      color: #e8eefc;
-    }
-    .wrap { max-width: var(--max); margin: 0 auto; padding: 48px 18px; }
-    .card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 14px; padding: 18px 18px; margin-top: 18px; }
-    h1 { margin: 0 0 6px; font-size: 34px; }
-    .sub { opacity: 0.8; margin: 0 0 14px; }
-    a { color: #7aa7ff; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .tag { display:inline-block; padding: 3px 10px; border-radius: 999px;
-           background: rgba(122,167,255,0.15); border: 1px solid rgba(122,167,255,0.25);
-           font-size: 12px; margin-right: 6px; }
-    .post { margin: 10px 0; }
-    .muted { opacity: 0.7; font-size: 13px; }
-  </style>
+  <title>Wonbin Kim 개발 로그</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
 <body>
-  <div class="wrap">
+  <main class="wrap center">
     <h1>Wonbin Kim 개발 로그</h1>
-    <p class="sub">C로 만든 중고거래 CLI 앱 개발 기록 · 임베디드 지향</p>
-  
-    <div class="card">
-      <span class="tag">C</span><span class="tag">CLI</span><span class="tag">DevLog</span>
-      <div class="post">
-        <a href="./posts/day01.html">Day 01 · 첫 프로토타입</a>
-        <div class="muted">구조체/입력 처리/Makefile 삽질 기록</div>
+    <p class="sub">
+      C 기반 프로젝트 개발 기록 · CLI · 임베디드 지향
+    </p>
+
+    <!-- 프로젝트 카드 -->
+    <a class="project-card" href="projects/used-cli/">
+      <div class="project-header">
+        <h2>중고거래 CLI 프로젝트</h2>
+        <span class="status">진행중</span>
       </div>
-    </div>
-  
-    <div class="card">
-      <div class="muted">연락: GitHub DM / Issues로</div>
-    </div>
-  </div>
+
+      <p class="desc">
+        C 언어로 구현한 중고거래 시스템.<br>
+        구조 설계부터 Day 단위 개발 로그까지 기록.
+      </p>
+
+      <div class="tags">
+        <span>C</span>
+        <span>CLI</span>
+        <span>DevLog</span>
+      </div>
+    </a>
+
+    <footer>
+      <span>Contact · GitHub Issues / DM</span>
+    </footer>
+  </main>
 </body>
 </html>
