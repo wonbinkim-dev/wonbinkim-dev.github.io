@@ -1,0 +1,101 @@
+:root {
+  --bg: #0b1220;
+  --card: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.08);
+  --text: #e8eefc;
+  --sub: rgba(232, 238, 252, 0.7);
+  --accent: #7aa7ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont,
+    "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  line-height: 1.7;
+}
+
+.wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 64px 20px;
+}
+
+.center {
+  text-align: center;
+}
+
+h1 {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+
+.sub {
+  color: var(--sub);
+  margin-bottom: 48px;
+}
+
+/* 프로젝트 카드 */
+.project-card {
+  display: block;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 32px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent);
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.project-header h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.status {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(122, 167, 255, 0.15);
+  border: 1px solid rgba(122, 167, 255, 0.3);
+  color: var(--accent);
+}
+
+.desc {
+  margin: 16px 0 22px;
+  color: var(--sub);
+  font-size: 14px;
+}
+
+/* 태그 */
+.tags span {
+  display: inline-block;
+  font-size: 12px;
+  padding: 4px 10px;
+  margin-right: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border);
+}
+
+footer {
+  margin-top: 64px;
+  font-size: 13px;
+  color: var(--sub);
+}
