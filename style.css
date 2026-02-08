@@ -124,3 +124,77 @@ footer {
   text-decoration: none;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+               Roboto, "Noto Sans KR", Arial, sans-serif;
+  background-color: #0f1117;
+  color: #e6e6e6;
+  line-height: 1.7;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+h1, h2 {
+  color: #ffffff;
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+
+h2 {
+  margin-top: 50px;
+  border-bottom: 1px solid #2a2d3a;
+  padding-bottom: 8px;
+}
+
+p {
+  color: #d0d0d0;
+}
+
+a {
+  color: #7aa7ff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* 코드 블록 */
+pre {
+  background-color: #161922;
+  padding: 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 14px;
+}
+
+code {
+  font-family: "Fira Code", Consolas, monospace;
+}
+
+/* 목록 */
+ul, ol {
+  margin-left: 20px;
+}
+
+/* 하단 네비게이션 */
+.nav-links {
+  margin-top: 80px;
+}
+
+.nav-btn {
+  font-size: 14px;
+}
+
+
