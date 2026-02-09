@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Day 02 · 코드 구조개선 및 로직 고치기</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+</head>
+<body>
+  <div class="container">
+
+        <div class="nav-links">
+          <a href="index.html" class="back-link">← 메인으로</a>
+          <a href="day01.html" class="back-link">Day01</a>
+        </div>
+
+
+        </div>
+
+    <h1>Day 02 · 코드 구조개선 및 로직 고치기</h1>
+
+   
+    <h2>프로젝트 목표</h2>
+    <p>
+      저번에 짠 코드의 여러가지 문제점중에서 가장 빠르게 고쳐야할 부분을 고민해보니,
+      아무래도 main함수에 너무 많은 것이 들어있어 구조를 먼저 개선하고 물품등록이나 삭제의 로직을 강화하는 것을 우선순위로 잡았다.
+    </p>
+
+   
+    <h2>현재 구현한 항목</h2>
+<ol>
+  <li>함수 만들기</li>
+  <li>메인 함수 구조 개선하기</li>
+  <li>물품 등록 및 제거 로직 개선하기</li>
+</ol>
+
+
+   
+    <h2>전체 코드</h2>
+   
+    <p>
+      아래는 고친 코드의 전체 코드이다. 전체코드를 먼저 보고 아래에서 개선사항의 세부적인 부분을 살펴보겠다.
+    </p>
+
+    <pre><code class="language-c">
+    #include <stdio.h>
+    #include <stdbool.h>
+    #include <stdlib.h> 
+    #include <time.h> 
+    #include <string.h>
+    
+    typedef struct {
+        int id;
+        char name[50];
+        int price;
+    } Item;
+    
+    void showMenu();
+    void addItem(Item items[], int *count);
+    void listItems(Item items[], int count);
+    void removeItem(Item items[], int *count);
+    int inputMenu();
+    
+    
+    int main(){
+        Item items[1000];
+        int count = 0;
+    
+        while (true) {
+            showMenu();
+            int menu = inputMenu();
+    
+            switch(menu) {
+                case 1: addItem(items, &count); break;
+                case 2: listItems(items, count); break;
+                case 3: removeItem(items, &count); break;
+                case 4: return 0;
+            }
+        }
+    }
+    
+    void showMenu(){
+        printf("1. 신규등록 \n2. 품목보기 \n3. 품목 제거 \n4. 프로그램 종료\n\n");
+    }
+    
+    int inputMenu() {
+        int menu;
+        printf("메뉴 선택: ");
+        scanf("%d", &menu);
+        getchar();
+        return menu;
+    }
+    
+    
+    void addItem(Item items[], int *count){ 
+        printf("신규등록 페이지, 계속 진행하려면 1을 뒤로가려면 5를 입력하세요.\n");
+    
+        int num = 0;
+        scanf("%d", &num);
+        getchar();
+    
+        if(num == 5) return;
+    
+        int duplicate;
+    
+        do {
+            duplicate = 0;
+            items[*count].id = rand() % 900000 + 100000;
+    
+            for(int i = 0; i < *count; i++) {
+                if(items[*count].id == items[i].id) {
+                    duplicate = 1;
+                    break;
+                }
+            }
+        } while(duplicate);
+        
+        printf("물품의 id는 %d입니다\n", items[*count].id);
+    
+        printf("물품의 이름을 입력하세요: ");
+        fgets(items[*count].name, sizeof(items[*count].name), stdin);
+        items[*count].name[strcspn(items[*count].name, "\n")] = '\0';
+    
+        printf("가격을 입력해 주세요: ");
+        items[*count].price = 0;
+        scanf("%d", &items[*count].price);
+        getchar();
+    
+        printf("등록되었습니다!\n\n이름: %s\n가격: %d원\n", items[*count].name, items[*count].price);
+    
+    
+        (*count)++;
+    }
+    
+    
+    void listItems(Item items[], int count){
+        printf("등록된 물품의 목록을 볼 수 있습니다, 계속 진행하려면 1을 뒤로가려면 5를 입력하세요.\n");
+    
+        int num = 0;
+        scanf("%d", &num);
+        getchar();
+    
+        if(num == 5) return;
+    
+        for (int j = 0; j < count; j++){
+            printf("id: %d\n이름: %s\n가격: %d원\n\n", items[j].id, items[j].name, items[j].price);
+        }
+    }
+    
+    void removeItem(Item items[], int *count){
+    
+        printf("등록된 물품을 제거할 수 있습니다, 계속 진행하려면 1을 뒤로가려면 5를 입력하세요.\n");
+    
+        int num = 0;
+        scanf("%d", &num);
+        getchar();
+    
+        if(num == 5) return;
+    
+        if(*count == 0){
+            printf("삭제할 항목이 없습니다.\n");
+            return;
+        }
+    
+        int id;
+        printf("삭제할 물품의 id를 입력하세요: ");
+        scanf("%d", &id);
+        getchar();
+    
+        int found = -1;
+    
+        for(int i = 0; i < *count; i++){
+            if(items[i].id == id){
+                found = i;
+                break;
+            }
+        }
+    
+        if(found == -1){
+            printf("해당 id를 찾을 수 없습니다.\n");
+            return;
+        }
+    
+        for(int i = found; i < *count - 1; i++){
+            items[i] = items[i + 1];
+        }
+    
+        (*count)--;
+    
+        printf("삭제 완료되었습니다.\n\n");
+    }
+    </code></pre>
+
+
+    
+    <h2>개선한점</h2>
+   
+    <ol>
+      1. 함수만들기:
+        main함수가 보기 힘들고 비대한건 모든 로직을 main함수 안에 넣었기 때문이다.<br>
+        이를 해결하기 위해 각각의 역할을 하는 함수를 만들었다.
+    </ol>
+    <pre><code class="language-c">
+    void showMenu();
+    void addItem(Item items[], int *count);
+    void listItems(Item items[], int count);
+    void removeItem(Item items[], int *count);
+    int inputMenu();
+
+
+    void showMenu(){
+        printf("1. 신규등록 \n2. 품목보기 \n3. 품목 제거 \n4. 프로그램 종료\n\n");
+     }
+      
+    int inputMenu() {
+        int menu;
+        printf("메뉴 선택: ");
+        scanf("%d", &menu);
+        getchar();
+        return menu;
+    }
+      
+      
+    void addItem(Item items[], int *count){ 
+        printf("신규등록 페이지, 계속 진행하려면 1을 뒤로가려면 5를 입력하세요.\n");
+      
+        int num = 0;
+        scanf("%d", &num);
+        getchar();
+      
+        if(num == 5) return;
+      
+        int duplicate;
+      
+        do {
+            duplicate = 0;
+            items[*count].id = rand() % 900000 + 100000;
+      
+            for(int i = 0; i < *count; i++) {
+                if(items[*count].id == items[i].id) {
+                    duplicate = 1;
+                    break;
+                }
+            }
+        } while(duplicate);
+
+        printf("물품의 id는 %d입니다\n", items[*count].id);
+      
+        printf("물품의 이름을 입력하세요: ");
+        fgets(items[*count].name, sizeof(items[*count].name), stdin);
+        items[*count].name[strcspn(items[*count].name, "\n")] = '\0';
+      
+        printf("가격을 입력해 주세요: ");
+        items[*count].price = 0;
+        scanf("%d", &items[*count].price);
+        getchar();
+      
+        printf("등록되었습니다!\n\n이름: %s\n가격: %d원\n", items[*count].name, items[*count].price);
+      
+      
+        (*count)++;
+    }
+      
+      
+    void listItems(Item items[], int count){
+        printf("등록된 물품의 목록을 볼 수 있습니다, 계속 진행하려면 1을 뒤로가려면 5를 입력하세요.\n");
+      
+        int num = 0;
+        scanf("%d", &num);
+        getchar();
+      
+        if(num == 5) return;
+      
+        for (int j = 0; j < count; j++){
+            printf("id: %d\n이름: %s\n가격: %d원\n\n", items[j].id, items[j].name, items[j].price);
+        }
+    }
+      
+    void removeItem(Item items[], int *count){
+      
+        printf("등록된 물품을 제거할 수 있습니다, 계속 진행하려면 1을 뒤로가려면 5를 입력하세요.\n");
+      
+        int num = 0;
+        scanf("%d", &num);
+        getchar();
+      
+        if(num == 5) return;
+      
+        if(*count == 0){
+            printf("삭제할 항목이 없습니다.\n");
+            return;
+        }
+      
+        int id;
+        printf("삭제할 물품의 id를 입력하세요: ");
+        scanf("%d", &id);
+        getchar();
+      
+        int found = -1;
+      
+        for(int i = 0; i < *count; i++){
+            if(items[i].id == id){
+                found = i;
+                break;
+            }
+        }
+      
+        if(found == -1){
+            printf("해당 id를 찾을 수 없습니다.\n");
+            return;
+        }
+      
+        for(int i = found; i < *count - 1; i++){
+            items[i] = items[i + 1];
+        }
+      
+        (*count)--;
+      
+        printf("삭제 완료되었습니다.\n\n");
+    }
+
+    </code></pre>
+
+    <p>
+      위와 같이 각각의 동작을 수행할 함수들을 만들어 주었다.<br>
+      따라서 main함수가 매우 간단해져 실행 흐름을 파악하기 쉬워졌다.
+    </p>
+
+    <h2>2. main함수 구조개선</h2>
+            
+    <p>
+      개선된 main함수는 다음과 같다.
+    </p>
+    <pre><code class="language-c">
+    int main(){
+        Item items[1000];
+        int count = 0;
+      
+        while (true) {
+            showMenu();
+            int menu = inputMenu();
+      
+            switch(menu) {
+                case 1: addItem(items, &count); break;
+                 case 2: listItems(items, count); break;
+                 case 3: removeItem(items, &count); break;
+                 case 4: return 0;
+            }
+         }
+     } 
+    </code></pre>
+
+    <p>
+      실행흐름을 파악하기 쉬워졌다.
+    </p>
+            
+    <h2>3. 로직 개선</h2>
+   
+    <p>
+      첫 번째로 물품을 생성할때 id의 중복을 방지할 구조가 없었다.<br>
+      id가 중복되면 나중에 삭제할때 큰 문제가 되기 때문에 중복 방지 러직을 추가했다
+    </p>
+
+     <pre><code class="language-c">
+      items[*count].id = rand() % 900000 + 100000;
+      for(int i = 0; i < *count; i++){
+          if(items[*count].id == items[i].id){
+              items[*count].id = rand() % 900000 + 100000;
+             break;
+          }
+      } 
+      </code></pre>
+            <p>
+      이것은 초기 중복방지 모델이다. 위의 코드의 문제점은 새로만든 id또한 중복일때를 방지하지 못하여 아래와 같이 개선하였다.
+            </p>
+     <pre><code class="language-c">
+       int duplicate;
+    
+      do {
+          duplicate = 0;
+          items[*count].id = rand() % 900000 + 100000;
+    
+          for(int i = 0; i < *count; i++) {
+              if(items[*count].id == items[i].id) {
+                  duplicate = 1;
+                  break;
+              }
+           }
+      } while(duplicate);
+      </code></pre>
+    
+            <p>
+      두 번째로 고친것은 등록된 물품을 삭제하는 로직이다.<br>
+      기존에는 삭제를 물리적으로 진행하여 중간에 있는 물품을 지우면 해당 공간은 0으로 초기화 되고 마지막에 등록만 물품이 사라지는 문제가 있었다.<br>
+      이를 삭제하고 싶은 물품의 인덱스를 기준으로 뒤어있는 인덱스를 한칸씩 당여오는 방식으로 개선하였다.
+    </p>
+
+     <pre><code class="language-c">
+      for(int i = 0; i < *count; i++){
+          if(items[i].id == id){
+              found = i;
+               break;
+          }
+      }
+  
+      if(found == -1){
+          printf("해당 id를 찾을 수 없습니다.\n");
+          return;
+       }
+    
+       for(int i = found; i < *count - 1; i++){
+          items[i] = items[i + 1];
+      }
+    
+      (*count)--;
+      </code></pre>            
+    
+            
+            <h2>4. 느낀점</h2>   
+             <p>
+      로직을 개선하는 단계에서 계속해서 새로운 문제가 발생해 고치는데 애를 먹었다.<br>
+      그럼에도 목표하는 만큼 개선에 성공하여 뿌듯하다.
+    </p>
+
+    <div class="nav-links">
+      <a href="index.html" class="back-link">← 메인으로 돌아가기</a>
+    </div>
+
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+</body>
+</html>
