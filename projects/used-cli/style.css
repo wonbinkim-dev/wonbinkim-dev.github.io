@@ -14,123 +14,79 @@
     --accent-orange: #fb923c;
 }
 
-/* 2️⃣ 전체 레이아웃 / 공통 스타일 */
+/* ===== 전체 기본 설정 ===== */
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-    background: #0f1117;
-    color: var(--text-main);
+    padding: 0;
+    background-color: #0f1117;
+    color: #e6edf3;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
 }
 
+/* ===== 중앙 컨테이너 ===== */
 .container {
-    max-width: 860px;
-    margin: 80px auto;
-    padding: 48px;
-}
-
-.back {
-    display: inline-block;
-    margin-bottom: 28px;
-    font-size: 0.9rem;
-    color: var(--accent-blue);
-    text-decoration: none;
-}
-
-h1 {
-    font-size: 2.4rem;
-    margin-bottom: 12px;
-}
-
-.subtitle {
-    color: var(--text-muted);
-    margin-bottom: 48px;
-}
-
-.card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-subtle);
-    border-radius: 16px;
-    padding: 28px 32px;
-    margin-bottom: 24px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.45);
-}
-
-.card h2 {
-    margin: 0 0 8px 0;
-    font-size: 1.4rem;
-}
-
-.card p {
-    margin: 0;
-    color: var(--text-sub);
-}
-
-h2.section {
-    margin-top: 64px;
-    margin-bottom: 16px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border-subtle);
-}
-
-/* 3️⃣ 코드 블록 기본 스타일 */
-pre {
-    background: #020617;
-    padding: 22px;
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 30px;
+    background-color: #161b22;
     border-radius: 12px;
-    border: 1px solid var(--border-subtle);
-    overflow-x: auto;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
 }
 
-code {
-    font-family: "JetBrains Mono", Consolas, monospace;
-    font-size: 0.95rem;
-    color: #e5e7eb;
+/* ===== 제목 ===== */
+h1 {
+    border-left: 6px solid #58a6ff;
+    padding-left: 15px;
 }
 
-/* 4️⃣ 코드 색상(문법 강조) */
-.keyword {
-    color: var(--accent-purple);
+h2 {
+    border-bottom: 1px solid #30363d;
+    padding-bottom: 6px;
+    margin-top: 40px;
 }
 
-.type {
-    color: var(--accent-blue);
+/* ===== 링크 ===== */
+a {
+    color: #58a6ff;
+    text-decoration: none;
+    font-weight: 500;
 }
 
-.string {
-    color: var(--accent-green);
+a:hover {
+    color: #79c0ff;
 }
 
-.number {
-    color: var(--accent-orange);
-}
-
-.comment {
-    color: #64748b;
-    font-style: italic;
-}
-
+/* ===== 버튼 느낌 링크 ===== */
 .back-link {
     display: inline-block;
     margin-top: 40px;
-    padding: 10px 18px;
-
-    color: #58a6ff;
-    background-color: rgba(88, 166, 255, 0.08);
-
+    padding: 10px 16px;
+    background-color: #1f2937;
     border: 1px solid #30363d;
     border-radius: 8px;
-
-    text-decoration: none;
-    font-weight: 500;
-
-    transition: all 0.2s ease;
+    color: #e6edf3;
+    transition: 0.2s;
 }
 
 .back-link:hover {
-    color: #ffffff;
-    background-color: #58a6ff;
-    border-color: #58a6ff;
+    background-color: #30363d;
 }
 
-transform: translateY(-2px);
-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+/* ===== 코드 블록 ===== */
+pre {
+    background-color: #1c2128;
+    padding: 20px;
+    border-radius: 10px;
+    overflow-x: auto;
+    border: 1px solid #30363d;
+}
+
+code {
+    color: #79c0ff;
+}
+
+/* ===== 목록 ===== */
+ul, ol {
+    padding-left: 20px;
+}
