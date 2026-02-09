@@ -40,11 +40,11 @@
     </p>
 
     <pre><code class="language-c">
-    #include <stdio.h>
-    #include <stdbool.h>
-    #include <stdlib.h> 
-    #include <time.h> 
-    #include <string.h>
+    #include &lt;stdio.h&gt;
+    #include &lt;stdbool.h&gt;
+    #include &lt;stdlib.h&gt;
+    #include &lt;time.h&gt;
+    #include &lt;string.h&gt;
     
     typedef struct {
         int id;
@@ -371,7 +371,7 @@
       이것은 초기 중복방지 모델이다. 위의 코드의 문제점은 새로만든 id또한 중복일때를 방지하지 못하여 아래와 같이 개선하였다.
             </p>
      <pre><code class="language-c">
-       int duplicate;
+      int duplicate;
     
       do {
           duplicate = 0;
