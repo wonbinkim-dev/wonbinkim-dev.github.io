@@ -338,10 +338,10 @@
             int menu = inputMenu();
       
             switch(menu) {
-                case 1: addItem(items, &count); break;
-                 case 2: listItems(items, count); break;
-                 case 3: removeItem(items, &count); break;
-                 case 4: return 0;
+              case 1: addItem(items, &count); break;
+              case 2: listItems(items, count); break;
+              case 3: removeItem(items, &count); break;
+              case 4: return 0;
             }
          }
      } 
@@ -362,8 +362,8 @@
       items[*count].id = rand() % 900000 + 100000;
       for(int i = 0; i < *count; i++){
           if(items[*count].id == items[i].id){
-              items[*count].id = rand() % 900000 + 100000;
-             break;
+            items[*count].id = rand() % 900000 + 100000;
+            break;
           }
       } 
       </code></pre>
@@ -379,8 +379,8 @@
     
           for(int i = 0; i < *count; i++) {
               if(items[*count].id == items[i].id) {
-                  duplicate = 1;
-                  break;
+                duplicate = 1;
+                break;
               }
            }
       } while(duplicate);
